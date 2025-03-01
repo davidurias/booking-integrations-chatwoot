@@ -131,6 +131,8 @@ def handler(event, context):
         
         msg_type = msg["message_type"]
 
+        print(msg)
+
         if msg_type == "inconming":
             msg_content = msg["content"]         
             match msg_content:
