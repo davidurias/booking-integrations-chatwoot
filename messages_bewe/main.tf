@@ -11,7 +11,7 @@ module "lambda" {
   handler     = "index.handler"
   runtime     = "python3.13"
   memory_size = 256
-  timeout     = 15
+  timeout     = 60
 
   layers = [
     local.integrations_layer,
