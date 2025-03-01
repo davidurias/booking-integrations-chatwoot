@@ -25,7 +25,7 @@ module "lambda" {
   }
  
   ##DB Settings
-
+  db_id    = local.db_id
   db_host  = local.db_host
   db_port  = local.db_port
   db_sg_id = local.db_sg_id

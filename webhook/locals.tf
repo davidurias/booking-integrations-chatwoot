@@ -7,6 +7,7 @@ locals {
   subnets_private = data.terraform_remote_state.baseline.outputs.subnets_private
   vpc_id          = data.terraform_remote_state.baseline.outputs.vpc_id
 
+  db_id  = data.terraform_remote_state.baseline.outputs.db_id
   db_host  = data.terraform_remote_state.baseline.outputs.db_host
   db_port  = data.terraform_remote_state.baseline.outputs.db_port
   db_sg_id = data.terraform_remote_state.baseline.outputs.db_sg_id
