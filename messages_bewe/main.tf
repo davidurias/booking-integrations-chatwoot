@@ -9,7 +9,7 @@ module "lambda" {
   name = "chatwoot-messages-bewe"
 
   handler     = "index.handler"
-  runtime     = "nodejs20.x"
+  runtime     = "python3.13"
   memory_size = 256
   timeout     = 15
 
