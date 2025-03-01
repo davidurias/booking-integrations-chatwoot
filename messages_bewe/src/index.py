@@ -16,7 +16,7 @@ if os.environ.get('AWS_LAMBDA_FUNCTION_NAME') is not None:
 session = None
 common = Common()
 
-start_of_work, end_of_work = common.get_start_end_work(datetime.now(pytz.utc),-1)
+start_of_work, end_of_work = common.get_start_end_work(datetime.now(pytz.utc),0)
 
 
 def process_confirmations(confirmation):
