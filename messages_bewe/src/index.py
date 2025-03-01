@@ -1,6 +1,8 @@
 from datetime import datetime, timezone
 import os
 import pytz
+import logging
+import sqlalchemy.engine
 from sqlalchemy import update
 from aws_xray_sdk.core import xray_recorder
 from aws_xray_sdk.core import patch_all
@@ -14,7 +16,7 @@ if os.environ.get('AWS_LAMBDA_FUNCTION_NAME') is not None:
 session = None
 common = Common()
 
-start_of_work, end_of_work = common.get_start_end_work(datetime.now(pytz.utc),0)
+start_of_work, end_of_work = common.get_start_end_work(datetime.now(pytz.utc),-1)
 
 
 def process_confirmations(confirmation):
@@ -114,6 +116,26 @@ def handler(event, context):
 
     for confirmation in unique_confirmations.values():
         process_confirmations(confirmation)
+
+
+    remminders = session.query(MessageReminder).filter(
+        MessageReminder.time.between(start_of_work, end_of_work),
+        MessageReminder.chatwoot_message_id == None
+    ).all()
+
+    print(remminders)
+
+    unique_reminders = {}
+
+    for reminder in remminders:
+        bewe_client = reminder.bewe_client
+        client_id = bewe_client.id
+
+        if client_id not in unique_reminders or unique_reminders[client_id].time > reminder.time:
+            unique_reminders[client_id] = reminder
+
+    for reminder in unique_reminders.values():
+        process_reminders(reminder)
 
 
     
