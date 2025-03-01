@@ -14,7 +14,7 @@ module "lambda" {
   timeout     = 15
 
   layers = [
-    local.integrations_layer_nodejs,
+    local.integrations_layer,
   ]
 
   xray_enabled     = true
@@ -30,8 +30,6 @@ module "lambda" {
   db_port  = local.db_port
   db_sg_id = local.db_sg_id
   db_user  = local.db_user
-  db_pass  = local.db_pass
-
 
   #Cache Settings
 
@@ -64,7 +62,7 @@ module "lambda" {
 
   apigw_id       = local.apigw_api_id
   apigw_route    = null
-  apigw_role_arn = local.apigw_api_iam_role
+  apigw_role_arn = local.apigw_api_iam_role_arn
 
   #CW Rule Scheduler
   scheduler_expression = "cron(10 13-23,0-3 * * ? *)"
