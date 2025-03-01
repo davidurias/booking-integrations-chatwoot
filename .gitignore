@@ -1,0 +1,33 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+*.tfvars.json
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars.json
+
+# Ignore overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore sensitive files (optional, store secrets securely)
+credentials.tfvars
+
+# IDE/editor directories and files
+.vscode/
+.idea/
+*.swp
+*.bak
+*.tmp
+*.DS_Store
+
+# Logs and OS generated files
+*.log
+*.bak
+Thumbs.db
+
+__pycache__/

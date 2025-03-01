@@ -1,0 +1,36 @@
+# Exclude variable definitions, local configurations, and secret files
+*.tfvars
+*.tfvars.json
+credentials.tfvars
+
+# Exclude Terraform state files, which are managed by remote backends
+*.tfstate
+*.tfstate.*
+crash.log
+terraform.tfstate.backup
+terraform.tfvars.json
+
+# Exclude dependency lock files (useful for local state management but not required remotely)
+.terraform.lock.hcl
+
+# Exclude local Terraform cache and hidden directories
+.terraform/
+
+# Exclude provider overrides and any environment-specific overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore any local CLI configuration and credentials files
+.terraformrc
+terraform.rc
+
+# IDE and editor directories, OS-specific files, and temporary files
+.vscode/
+.idea/
+*.swp
+*.bak
+*.tmp
+*.DS_Store
+Thumbs.db
