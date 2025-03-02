@@ -106,6 +106,8 @@ def msg_cancel(msg):
             MessageConfirmation.chatwoot_message_id == msg_confirmation.chatwoot_message_id
         ).all()
 
+        print(work_state)
+
         for confirmation in confirmations:
             confirmation.bewe_work.state = work_state
             session.commit()
