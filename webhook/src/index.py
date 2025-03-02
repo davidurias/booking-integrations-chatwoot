@@ -103,7 +103,7 @@ def msg_cancel(msg):
 
         print(hours_diff)
 
-        if msg_confirmation.bewe_client.bewe_account.reminder_time + 1 > hours_diff: 
+        if msg_confirmation.bewe_client.bewe_account.reminder_time + 1 < hours_diff: 
             work_state = "res_client_rejected"
 
         confirmations = session.query(MessageConfirmation).filter(
