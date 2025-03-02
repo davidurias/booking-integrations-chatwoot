@@ -30,6 +30,7 @@ def bewe_api_work_state_update(bewe_work, state):
         return None
 
 def msg_confirm(msg):
+    print(reply_msg_id)
     reply_msg_id = msg["content_attributes"]["in_reply_to"]
     msg_confirmation = session.query(MessageConfirmation).filter(
         MessageConfirmation.chatwoot_message_id == reply_msg_id
