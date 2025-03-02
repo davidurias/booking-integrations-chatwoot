@@ -76,7 +76,8 @@ def msg_confirm(msg):
         common.message_send(msg_confirmation, content, template_params, session, False)
 
 def msg_cancel(msg):
-    reply_msg_id = msg.content_attributes.in_reply_to
+    reply_msg_id = msg["content_attributes"]["in_reply_to"]
+    print(reply_msg_id)
     msg_confirmation = session.query(MessageConfirmation).filter(
         MessageConfirmation.chatwoot_message_id == reply_msg_id
     ).first()
