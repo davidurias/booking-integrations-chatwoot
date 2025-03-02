@@ -97,9 +97,13 @@ def msg_cancel(msg):
         }
         common.message_send(msg_confirmation, content, template_params, session, False)
 
-        work_state = "res_late_cancel"
+        work_state = "res_missing"
 
-        if msg_confirmation.bewe_client.bewe_account.reminder_time + 1 > common.get_hours_between_dates(datetime.now(pytz.utc).isoformat(), msg_confirmation.bewe_work.work_time.isoformat()): 
+        hours_diff = common.get_hours_between_dates(datetime.now(pytz.utc).isoformat(), msg_confirmation.bewe_work.work_time.isoformat())
+
+        print(hours_diff)
+
+        if msg_confirmation.bewe_client.bewe_account.reminder_time + 1 > hours_diff: 
             work_state = "res_client_rejected"
 
         confirmations = session.query(MessageConfirmation).filter(
