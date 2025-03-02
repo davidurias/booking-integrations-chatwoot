@@ -59,6 +59,8 @@ def msg_confirm(msg):
 
         for confirmation in confirmations:
             print("updating work state")
+            confirmation.bewe_work.state = "confirmed"
+            session.commit()
             bewe_api_work_state_update(confirmation.bewe_work, "confirmed")
 
     else:
@@ -105,6 +107,8 @@ def msg_cancel(msg):
         ).all()
 
         for confirmation in confirmations:
+            confirmation.bewe_work.state = work_state
+            session.commit()
             bewe_api_work_state_update(confirmation.bewe_work, work_state)
         
     else:
