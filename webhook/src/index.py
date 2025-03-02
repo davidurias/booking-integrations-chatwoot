@@ -51,7 +51,7 @@ def msg_confirm(msg):
             "language": "es_mx",
         }
 
-        common.message_send(msg_confirmation, content, template_params, session)
+        common.message_send(msg_confirmation, content, template_params, session, False)
 
         confirmations = session.query(MessageConfirmation).filter(
             MessageConfirmation.chatwoot_message_id == msg_confirmation.chatwoot_message_id
@@ -73,7 +73,7 @@ def msg_confirm(msg):
             }
         }
 
-        common.message_send(msg_confirmation, content, template_params, session)
+        common.message_send(msg_confirmation, content, template_params, session, False)
 
 def msg_cancel(msg):
     reply_msg_id = msg.content_attributes.in_reply_to
@@ -92,7 +92,7 @@ def msg_cancel(msg):
             "category": 'utility',
             "language": 'es_mx',
         }
-        common.message_send(msg_confirmation, content, template_params, session)
+        common.message_send(msg_confirmation, content, template_params, session, False)
 
         work_state = "res_late_cancel"
 
@@ -117,7 +117,7 @@ def msg_cancel(msg):
                 2: msg_confirmation.bewe_client.bewe_account.phone_number
             }
         }
-        common.message_send(msg_confirmation, content, template_params, session)
+        common.message_send(msg_confirmation, content, template_params, session, False)
 
 
 def handler(event, context):
