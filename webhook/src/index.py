@@ -40,8 +40,6 @@ def msg_confirm(msg):
     work_sate = msg_confirmation.bewe_work.state
 
     if work_sate == "res":
-        msg_confirmation.bewe_work.state = "confirmed"
-        session.commit()
 
         content = "Hola, gracias por tu confirmación, te estaremos esperando para tu cita. ¡Gracias!."
         template_params = {
