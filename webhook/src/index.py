@@ -22,6 +22,7 @@ def bewe_api_work_state_update(bewe_work, state):
         'content-type': 'application/json',
         'authorization': 'Bearer ' + bewe_work.bewe_account.bewe_apikey
     } 
+    print(url)
     response = requests.get(url, headers=headers, json={"state": state})
     print(json.loads(response.text))
     if response.status_code == 200:
