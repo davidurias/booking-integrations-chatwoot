@@ -24,7 +24,7 @@ def bewe_api_work_state_update(bewe_work, state):
     } 
     print(url)
     response = requests.get(url, headers=headers, json={"state": state})
-    print(json.loads(response.text))
+    print(response.text)
     if response.status_code == 200:
         return True
     else:
