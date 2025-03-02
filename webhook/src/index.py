@@ -23,6 +23,7 @@ def bewe_api_work_state_update(bewe_work, state):
         'authorization': 'Bearer ' + bewe_work.bewe_account.bewe_apikey
     } 
     response = requests.get(url, headers=headers, json={"state": state})
+    print(json.loads(response.text))
     if response.status_code == 200:
         return True
     else:
@@ -56,6 +57,7 @@ def msg_confirm(msg):
         ).all()
 
         for confirmation in confirmations:
+            print("updating work state")
             bewe_api_work_state_update(confirmation.bewe_work, "confirmed")
 
     else:
@@ -131,7 +133,7 @@ def handler(event, context):
         
         msg_type = msg["message_type"]
 
-        print(msg)
+        #print(msg)
 
         if msg_type == "incoming":
             msg_content = msg["content"]         
