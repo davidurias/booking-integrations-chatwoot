@@ -124,8 +124,6 @@ def msg_cancel(msg):
 
         session.commit()
         
-            
-        
     else:
         content = "Hola, tu cita ya ha sido cancelada con anterioridad, no es posible cancelarla en este momento"
         template_params = {

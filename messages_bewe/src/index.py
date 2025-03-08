@@ -115,7 +115,8 @@ def handler(event, context):
             unique_confirmations[client_id] = confirmation  # Store the entire confirmation object
 
     for confirmation in unique_confirmations.values():
-        process_confirmations(confirmation)
+        if confirmation.bewe_work.bewe_client.phone_number is not None or confirmation.bewe_work.bewe_client.phone_number is not "":
+            process_confirmations(confirmation)
 
 
     remminders = session.query(MessageReminder).filter(
@@ -135,7 +136,8 @@ def handler(event, context):
             unique_reminders[client_id] = reminder
 
     for reminder in unique_reminders.values():
-        process_reminders(reminder)
+        if reminder.bewe_work.bewe_client.phone_number is not None or reminder.bewe_work.bewe_client.phone_number is not "":
+            process_reminders(reminder)
 
 
     
