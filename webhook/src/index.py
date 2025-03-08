@@ -8,7 +8,7 @@ from aws_xray_sdk.core import patch_all
 import requests
 from shared_layer.base import Base
 from shared_layer.common import Common
-from shared_layer.model_integrations import MessageConfirmation
+from shared_layer.model_integrations import MessageConfirmation, MessageReminder
 
 if os.environ.get('AWS_LAMBDA_FUNCTION_NAME') is not None:
     patch_all()
@@ -116,6 +116,15 @@ def msg_cancel(msg):
             confirmation.bewe_work.state = work_state
             session.commit()
             bewe_api_work_state_update(confirmation.bewe_work, work_state)
+            
+            # Delete related MessageReminder records
+            session.query(MessageReminder).filter(
+                MessageReminder.bewe_work_id == confirmation.bewe_work_id
+            ).delete(synchronize_session=False)
+
+        session.commit()
+        
+            
         
     else:
         content = "Hola, tu cita ya ha sido cancelada con anterioridad, no es posible cancelarla en este momento"
