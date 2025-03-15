@@ -127,7 +127,7 @@ def handler(event, context):
 
     remminders = session.query(MessageReminder).filter(
         MessageReminder.time.between(start_of_work, end_of_work),
-        MessageReminder.chatwoot_message_id is None
+        MessageReminder.chatwoot_message_id == None
     ).all()
 
     print(remminders)
