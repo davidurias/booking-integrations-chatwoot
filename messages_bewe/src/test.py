@@ -1,12 +1,7 @@
-import json
-import pprint
 import boto3
 import os
 
 from index import handler
-from shared_layer.base import Base
-from shared_layer.common import Common
-from shared_layer.model_integrations import BeweClient, BeweWork
 
 sqs = False
 
@@ -16,7 +11,7 @@ if ENV == "local":
     os.environ["DB_USER"] = 'integrations'
     os.environ["DB_PORT"] = "5432"
     os.environ["DB_NAME"] = 'integrations'
-    
+
 SQS_URL = 'https://sqs.us-east-1.amazonaws.com/992382547995/integrations-bewe-clientNew'
 SQS_DLQ_URL = 'https://sqs.us-east-1.amazonaws.com/992382547995/integrations-bewe-clientNew-dlq'
 
@@ -38,7 +33,7 @@ if sqs:
             VisibilityTimeout=5,
             WaitTimeSeconds=0
         )
-#print(sqs_message)
+# print(sqs_message)
 
 event = {}
 handler(event=event, context={})
