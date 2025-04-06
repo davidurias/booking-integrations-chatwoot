@@ -1,5 +1,5 @@
 // Configuration
-const API_BASE_URL = 'YOUR_API_ENDPOINT'; // Replace with your API Gateway URL
+const API_BASE_URL = 'https://api.booking.novaxtreme.com/integrations/chatwoot/bewe/dashboard'; // Replace with your API Gateway URL
 
 // DOM Elements
 const worksList = document.getElementById('works-list');
@@ -75,7 +75,7 @@ function renderWorks(works) {
 // Fetch works from API
 async function fetchWorks(contactId) {
     try {
-        const response = await fetch(`${API_BASE_URL}/integrations/chatwoot/dashboard/works?contact_id=${contactId}`);
+        const response = await fetch(`${API_BASE_URL}?contact_id=${contactId}`);
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
