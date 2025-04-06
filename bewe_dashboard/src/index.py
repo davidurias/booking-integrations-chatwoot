@@ -20,8 +20,7 @@ def handler(event, context):
             return {
                 'statusCode': 400,
                 'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Content-Type': 'application/json'
                 },
                 'body': json.dumps({
                     'error': 'Missing contact_id parameter'
@@ -39,8 +38,7 @@ def handler(event, context):
             return {
                 'statusCode': 404,
                 'headers': {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Content-Type': 'application/json'
                 },
                 'body': json.dumps({
                     'error': 'Client not found'
@@ -64,8 +62,7 @@ def handler(event, context):
         return {
             'statusCode': 200,
             'headers': {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/json'
             },
             'body': json.dumps({
                 'works': works_data,
@@ -80,8 +77,7 @@ def handler(event, context):
         return {
             'statusCode': 500,
             'headers': {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/json'
             },
             'body': json.dumps({
                 'error': 'Internal server error'

@@ -6,6 +6,25 @@ resource "aws_cloudfront_origin_access_control" "bewe_dashboard_oac" {
   signing_protocol                  = "sigv4"
 }
 
+resource "aws_cloudfront_response_headers_policy" "bewe_dashboard_cors" {
+  name = "bewe-dashboard-cors-policy"
+  comment = "CORS policy for Bewe Dashboard allowing Chatwoot origin"
+  cors_config {
+    access_control_allow_credentials = false
+    access_control_allow_headers {
+      items = ["*"] # Allow all standard headers
+    }
+    access_control_allow_methods {
+      items = ["GET", "HEAD", "OPTIONS"] # Methods used by the dashboard
+    }
+    access_control_allow_origins {
+      items = ["chatwoot.novaxtreme.com"]
+    }
+    access_control_max_age_sec = 3600 # Cache preflight response for 1 hour
+    origin_override = true
+  }
+}
+
 resource "aws_cloudfront_distribution" "bewe_dashboard_distribution" {
   origin {
     domain_name              = aws_s3_bucket.bewe_dashboard.bucket_regional_domain_name
@@ -30,6 +49,7 @@ resource "aws_cloudfront_distribution" "bewe_dashboard_distribution" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "S3-${aws_s3_bucket.bewe_dashboard.id}"
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.bewe_dashboard_cors.id
 
     forwarded_values {
       query_string = false
