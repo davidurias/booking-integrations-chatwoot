@@ -59,7 +59,6 @@ def handler(event, context):
                 'id': work.id,
                 'status': work.state,
                 'work_time': work.work_time.isoformat() if work.work_time else None,
-                'last_modification': work.last_modification
             })
         
         return {

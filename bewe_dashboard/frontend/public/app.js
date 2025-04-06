@@ -66,7 +66,6 @@ function renderWorks(works) {
             </div>
             <div class="work-details">
                 <p>Date: ${formatDate(work.work_time)}</p>
-                <p>Last modified: ${work.last_modification ? formatDate(new Date(work.last_modification * 1000)) : 'N/A'}</p>
             </div>
         </div>
     `).join('');
