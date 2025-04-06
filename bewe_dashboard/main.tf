@@ -53,7 +53,7 @@ module "lambda" {
 
   #API GW SETTINGS
   apigw_id            = local.apigw_api_id
-  apigw_route         = "GET /integrations/chatwoot/bewe/dashboard/"
+  apigw_route         = "GET /integrations/chatwoot/bewe/dashboard"
   apigw_role_arn      = local.apigw_api_iam_role_arn
 
   alarm_topic = local.topic_owner_arn
