@@ -52,7 +52,10 @@ resource "aws_s3_bucket_policy" "bewe_dashboard" {
     ]
   })
 
-  depends_on = [aws_s3_bucket_public_access_block.bewe_dashboard]
+  depends_on = [
+    aws_s3_bucket_public_access_block.bewe_dashboard,
+    aws_s3_bucket.bewe_dashboard
+  ]
 }
 
 resource "aws_s3_object" "frontend_files" {
