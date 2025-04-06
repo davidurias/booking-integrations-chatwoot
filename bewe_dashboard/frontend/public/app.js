@@ -104,22 +104,30 @@ async function initDashboard(contactId) {
 
 // Listen for Chatwoot app context
 window.addEventListener("message", async function (event) {
+    console.log('Received message event:', event.data); // Log the raw event data
     try {
         const eventData = JSON.parse(event.data);
+        console.log('Parsed event data:', eventData); // Log the parsed data
         
         if (eventData.event === 'appContext') {
+            console.log('Processing appContext event...'); // Log processing start
             const { contact } = eventData.data;
             
             if (!contact || !contact.id) {
+                console.warn('No contact ID in appContext event.'); // Warn if no contact
                 showError('No contact information available');
                 return;
             }
             
+            console.log('Contact ID found:', contact.id); // Log the ID
             await initDashboard(contact.id);
         }
     } catch (error) {
-        showError('Failed to process Chatwoot event');
-        console.error('Error:', error);
+        // Ignore errors from non-JSON messages or other event types
+        if (!(error instanceof SyntaxError)) {
+            showError('Failed to process Chatwoot event');
+            console.error('Error processing message event:', error);
+        }
     }
 });
 
